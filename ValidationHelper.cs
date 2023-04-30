@@ -1,6 +1,4 @@
-﻿using System;
-using System.Refelection;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Reflection;
 using System.Collections;
 
 namespace ValidationTool
@@ -37,12 +35,12 @@ namespace ValidationTool
             {
                 if (property.PropertyType == typeof(string))
                 {
-                    if (property.GetCustomAttribute(typeof(ValidationAttributes.NotNullOrEmptyAttribute) != null))
+                    if (property.GetCustomAttribute(typeof(ValidationAttributes.NotNullOrEmptyAttribute))!= null)
                     {
                         string propertyValue = (string)property.GetValue(inputDTO);
                         if(string.IsNullOrEmpty(propertyValue))
                         {
-                            ValidationAttributes.NotNullOrEmptyAttribute propertyAttr = (ValidationAttributes.NotNullOrEmptyAttribute)property.GetCustomAttribute(typeof(ValidationAttributes.NotNullOrEmptyAttribute))
+                            ValidationAttributes.NotNullOrEmptyAttribute propertyAttr = (ValidationAttributes.NotNullOrEmptyAttribute)property.GetCustomAttribute(typeof(ValidationAttributes.NotNullOrEmptyAttribute));
                             errorMsg += propertyAttr.ErrorContext;
                         }
                     }
@@ -64,4 +62,3 @@ namespace ValidationTool
         } 
     }
 }
-Console.WriteLine("Hello, World!");

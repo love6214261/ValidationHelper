@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Xml;
-using System.XMl.Serialization;
-using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 
 namespace ValidationTool
 {
@@ -10,10 +8,10 @@ namespace ValidationTool
     {
         public ExampleDTO()
         {
-            this.Input = new Input();
+            this.InputExample = new Input();
         }
         [XmlElement("Input")]
-        public Input Input { get; set; }
+        public Input InputExample { get; set; }
 
         public class Input
         {
@@ -21,13 +19,13 @@ namespace ValidationTool
             {
                 this.inputContent = "";
                 this.inputList = new List<string>(); 
-                this.inputElement = new inputElement();
+                this.inputElement = new InputElement();
             }
 
-            [ValidationAttributes.ValidateDTOIsNullOrEmpty("InputCointent is Null or Empty!")]
-            public string inputContent;
-            public List<string> inputList;
-            public InputElement inputElement;
+            [ValidationAttributes.NotNullOrEmpty("InputContent is Null or Empty!")]
+            public string inputContent { get; set; }
+            public List<string> inputList { get; set; }
+            public InputElement inputElement { get; set; }
         }
 
         public class InputElement
@@ -37,8 +35,8 @@ namespace ValidationTool
                 this.inputElementContent = "";
             }
 
-            [ValidationAttributes.ValidateDTOIsNullOrEmpty("InputElementCointent is Null or Empty!")]
-            public string inputElementContent;
+            [ValidationAttributes.NotNullOrEmpty("InputElementCointent is Null or Empty!")]
+            public string inputElementContent { get; set; }
         }
     }
 }
